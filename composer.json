@@ -1,0 +1,11 @@
+{
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.6",
+        "php-di/php-di": "^7.0",
+        "slim/twig-view": "^3.3",
+        "hive/hive-php-lib": "dev-main",
+        "hassankhan/config": "dev-develop"
+    },
+    "minimum-stability": "dev"
+}
