@@ -11,7 +11,10 @@
 <body>
     <main class="container">
       <p class="logo">
-        <img src="/logo.png" alt="Token Distrib Logo">
+        <picture>
+          <source srcset="logo-dark.png" media="(prefers-color-scheme: dark)"/>
+          <img src="logo.png" alt="Token Distrib logo"/>
+        </picture>
       </p>
       {% block content %}{% endblock %}
     </main>
