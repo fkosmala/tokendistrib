@@ -5,7 +5,8 @@
         "php-di/php-di": "^7.0",
         "slim/twig-view": "^3.3",
         "hive/hive-php-lib": "dev-main",
-        "hassankhan/config": "dev-develop"
+        "hassankhan/config": "dev-develop",
+        "phppkg/config": "dev-master"
     },
     "minimum-stability": "dev"
 }

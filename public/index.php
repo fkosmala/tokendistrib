@@ -4,7 +4,7 @@ use DI\Container;
 use Hive\PhpLib\Hive\Condenser as HiveCondenser;
 use Hive\PhpLib\HiveEngine\Account as HeAccount;
 use Hive\PhpLib\NetStat;
-use Noodlehaus\Config;
+use PhpPkg\Config\ConfigBox;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
@@ -30,10 +30,16 @@ if ((file_exists($confDir . 'db.sample.json')) && (!file_exists($confDir . 'db.j
     copy($confDir . 'db.sample.json', $confDir . 'db.json');
 }
 
+if ((file_exists($confDir . 'config.sample.json')) && (!file_exists($confDir . 'config.json'))) {
+    copy($confDir . 'config.sample.json', $confDir . 'config.json');
+}
+
 // Set DB config in container
 $container->set('db', function () {
-    $conf = new Config(__DIR__ . '/../config/db.json');
-    return $conf;
+    $dbConf = new ConfigBox();
+    $dbConf = $dbConf->loadJsonFile(__DIR__ . '/../config/db.json');
+
+    return $dbConf->getData();
 });
 
 // Set Twig template engine for view in Container
