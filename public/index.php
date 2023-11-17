@@ -3,6 +3,7 @@
 use DI\Container;
 use Hive\PhpLib\Hive\Condenser as HiveCondenser;
 use Hive\PhpLib\HiveEngine\Account as HeAccount;
+use Hive\PhpLib\NetStat;
 use Noodlehaus\Config;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
@@ -53,7 +54,15 @@ $app->add(TwigMiddleware::createFromContainer($app));
  * Index: This route is to display the index page.
  */
 $app->get('/', function ($request, $response) {
-    return $this->get('view')->render($response, 'index.html');
+    $netstat = new NetStat(APICONFIG);
+
+    $heNode = $netstat->getEngineBestNode();
+    $hivesql = $netstat->getHiveSql();
+
+    return $this->get('view')->render($response, 'index.html', [
+        "heNode" => $heNode,
+        "hivesql" => $hivesql
+    ]);
 })->setName('index');
 
 /**

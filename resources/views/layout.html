@@ -17,6 +17,25 @@
         </picture>
       </p>
       {% block content %}{% endblock %}
+      <article class="grid">
+        <div>
+          <h4>HiveSQL</h4>
+          {% if hivesql.status == "online" %}
+            <p>Status: <span class="success">ONLINE</span></p>
+          {% else %}
+            <p>Error to retrieve HiveSQL server.</p>
+          {% endif %}
+        </div>
+        <div>
+          <h4>Hive-engine node status</h4>
+          {% if heNode.online == true %}
+            <p>Selected node : {{ heNode.name }}</p>
+            <p>Status: <span class="success">ONLINE</span></p>
+          {% else %}
+            <p>Error to retrieve HiveEngine node.</p>
+          {% endif %}
+        </div>
+      </article>
     </main>
     <footer class="container">
       <div class="grid">
