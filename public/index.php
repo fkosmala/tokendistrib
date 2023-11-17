@@ -46,7 +46,6 @@ $container->set('apiConfig', function () {
     $hiveConf = new ConfigBox();
     $hiveConf = $hiveConf->loadJsonFile(__DIR__ . '/../config/config.json');
     return $hiveConf->getData();
-    
 });
 
 // Set Twig template engine for view in Container
@@ -127,10 +126,10 @@ $app->get('/account/{name}', function ($request, $response, $args) {
             ];
         }
     }
-    
+
     $api = new HiveCondenser($this->get['apiConfig']);
     $globalProps = json_encode($api->getDynamicGlobalProperties(), JSON_PRETTY_PRINT);
-    
+
     /* Convert VESTS to HP for each account and create an array with data */
     $bcVars = json_decode($globalProps, true);
     $vests = [];
@@ -159,7 +158,7 @@ $app->get('/account/{name}', function ($request, $response, $args) {
 $app->get('/tokens/{name}', function ($request, $response, $args) {
     $account = $args['name'];
 
-    $heApi = new HeAccount($this->get['apiConfig']);
+    $heApi = new HeAccount($this->get('apiConfig'));
     $payload = json_encode($heApi->getAccountBalance($account), JSON_PRETTY_PRINT);
 
     $response->getBody()->write($payload);

@@ -1,4 +1,23 @@
 {
+    "name": "fkosmala/tokendistrib",
+    "description": "Semi-automatic tool for Hive-Engine token distribution",
+    "type": "project",
+    "license": "GPL-3.0-only",
+    "keywords": [
+        "hive",
+        "hive-engine",
+        "blockchain",
+        "community",
+        "distribution"
+    ],
+    "authors": [
+        {
+          "name": "Florent Kosmala",
+          "email": "contact@florent-kosmala.fr",
+          "homepage": "https://florent-kosmala.fr/",
+          "role": "Developer"
+        }
+    ],
     "require": {
         "slim/slim": "4.*",
         "slim/psr7": "^1.6",
@@ -8,5 +27,13 @@
         "hassankhan/config": "dev-develop",
         "phppkg/config": "dev-master"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require-dev": {
+        "pds/skeleton": "^1.0",
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "scripts":{
+        "psr":"vendor/bin/phpcs --standard=PSR1,PSR12 ./public/*.php",
+        "pds":"vendor/bin/pds-skeleton validate"
+     } 
 }
