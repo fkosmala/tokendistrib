@@ -127,7 +127,7 @@ $app->get('/account/{name}', function ($request, $response, $args) {
         }
     }
 
-    $api = new HiveCondenser($this->get['apiConfig']);
+    $api = new HiveCondenser($this->get('apiConfig'));
     $globalProps = json_encode($api->getDynamicGlobalProperties(), JSON_PRETTY_PRINT);
 
     /* Convert VESTS to HP for each account and create an array with data */
