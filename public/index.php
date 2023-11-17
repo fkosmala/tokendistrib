@@ -38,8 +38,15 @@ if ((file_exists($confDir . 'config.sample.json')) && (!file_exists($confDir . '
 $container->set('db', function () {
     $dbConf = new ConfigBox();
     $dbConf = $dbConf->loadJsonFile(__DIR__ . '/../config/db.json');
-
     return $dbConf->getData();
+});
+
+// Set Hive & HiveEngine config in APICONFIG const
+$container->set('apiConfig', function () {
+    $hiveConf = new ConfigBox();
+    $hiveConf = $hiveConf->loadJsonFile(__DIR__ . '/../config/config.json');
+    return $hiveConf->getData();
+    
 });
 
 // Set Twig template engine for view in Container
@@ -60,7 +67,8 @@ $app->add(TwigMiddleware::createFromContainer($app));
  * Index: This route is to display the index page.
  */
 $app->get('/', function ($request, $response) {
-    $netstat = new NetStat(APICONFIG);
+    $apiConfig = $this->get('apiConfig');
+    $netstat = new NetStat($apiConfig);
 
     $heNode = $netstat->getEngineBestNode();
     $hivesql = $netstat->getHiveSql();
@@ -80,14 +88,14 @@ $app->get('/account/{name}', function ($request, $response, $args) {
     /* Get Delegatees with HiveSQL query */
     $config = $this->get('db');
     $connectInfo = [
-        "Database" => $config->get('dbName'),
-        "UID" => $config->get('dbUser'),
-        "PWD" => $config->get('dbPasswd'),
+        "Database" => $config['dbName'],
+        "UID" => $config['dbUser'],
+        "PWD" => $config['dbPasswd'],
         "Encrypt" => true,
         "TrustServerCertificate" => true
     ];
 
-    $conn = sqlsrv_connect($config->get('dbServer'), $connectInfo);
+    $conn = sqlsrv_connect($config['dbServer'], $connectInfo);
 
     if (!$conn) {
         $payload = "Connection error";
@@ -110,7 +118,7 @@ $app->get('/account/{name}', function ($request, $response, $args) {
         }
     }
     
-    $api = new HiveCondenser(APICONFIG);
+    $api = new HiveCondenser($this->get['apiConfig']);
     $globalProps = json_encode($api->getDynamicGlobalProperties(), JSON_PRETTY_PRINT);
     
     /* Convert VESTS to HP for each account and create an array with data */
@@ -141,7 +149,7 @@ $app->get('/account/{name}', function ($request, $response, $args) {
 $app->get('/tokens/{name}', function ($request, $response, $args) {
     $account = $args['name'];
 
-    $heApi = new HeAccount(APICONFIG);
+    $heApi = new HeAccount($this->get['apiConfig']);
     $payload = json_encode($heApi->getAccountBalance($account), JSON_PRETTY_PRINT);
 
     $response->getBody()->write($payload);
