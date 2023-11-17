@@ -71,6 +71,16 @@ $app->get('/', function ($request, $response) {
     $netstat = new NetStat($apiConfig);
 
     $heNode = $netstat->getEngineBestNode();
+    if ($heNode['online'] === true) {
+        $configFile = __DIR__ . '/../config/config.json';
+        $config = file_get_contents($configFile);
+        $array = json_decode($config, true);
+        if ($heNode['url'] != $array['heNode']) {
+            $array['heNode'] = $heNode['url'];
+            $json = json_encode($array, JSON_PRETTY_PRINT);
+            file_put_contents($configFile, $json);
+        }
+    }
     $hivesql = $netstat->getHiveSql();
 
     return $this->get('view')->render($response, 'index.html', [
