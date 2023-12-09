@@ -9,25 +9,24 @@
 {% endblock %}
 
 {% block content %}
+<p>
+    This script is used to generate the list of delegators for an HIVE account and then to create the request needed to send HE tokens.
+</p>
 <section id="accountSearch">
-    <p>
-        This script is used to generate the list of delegators for an HIVE account and then to create the request needed to send HE tokens.
-    </p>
-    <label for="account">Account name:</label>
+    <h2>Account search</h2>
+    <label for="account">Enter the account name:</label>
     <input type="text" name="account" id="account">
     <input id="findAccount" type="button" value="Search for delegatees">
 </section>
 
 <section id="delegatees">
     <h2>1. Select users status</h2>
-    <p>
-        The distribution can be made in 3 modes for each users :
-        <ul>
-            <li>Listed : User will receive rewards</li>
-            <li>Redistribution : User choose to redistribute rewards to other users</li>
-            <li>Hold : The community account will hold the rewards of the user</li>
-        </ul>
-    </p>
+    <p>The distribution can be made in 3 modes for each users :</p>
+    <ul>
+        <li>Listed : User will receive rewards</li>
+        <li>Redistribution : User choose to redistribute rewards to other users</li>
+        <li>Hold : The community account will hold the rewards of the user</li>
+    </ul>
     <h3>Total delegation = <span id="totalHPDisplayed"></span> HP</h3>
     <p id="totalHP" class="hide"></p>
     <table>
@@ -81,6 +80,8 @@
         </tbody>
     </table>
     <input type="button" id="sendQuery" value="Send !" class="hide">
-    <article id="finalResult" class="hide"></article>
+    <article id="finalResult" class="hide">
+        <h2>Result</h2>
+    </article>
 </section>
 {% endblock %}
