@@ -158,8 +158,16 @@ $app->get('/account/{name}', function ($request, $response, $args) {
 $app->get('/tokens/{name}', function ($request, $response, $args) {
     $account = $args['name'];
 
+    function compareByName(array $a, array $b)
+    {
+        return strcmp($a["symbol"], $b["symbol"]);
+    }
+
     $heApi = new HeAccount($this->get('apiConfig'));
-    $payload = json_encode($heApi->getAccountBalance($account), JSON_PRETTY_PRINT);
+    $tokens = $heApi->getAccountBalance($account);
+    usort ($tokens, 'compareByName');
+    print_r($tokens);
+    $payload = json_encode($tokens, JSON_PRETTY_PRINT);
 
     $response->getBody()->write($payload);
 
