@@ -12,8 +12,8 @@
     <main class="container">
       <p class="logo">
         <picture>
-          <source srcset="logo-dark.png" media="(prefers-color-scheme: dark)"/>
-          <img src="logo.png" alt="Token Distrib logo"/>
+          <source srcset="logo-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="logo.png" alt="Token Distrib logo">
         </picture>
       </p>
       {% block content %}{% endblock %}
@@ -40,29 +40,30 @@
     <footer class="container">
       <div class="grid">
         <p>
-          This tool was made with lot of &#10084; &amp; &#9749;<br/>
+          This tool was made with &#10084; &amp; &#9749;<br>
           by <a href="https://florent-kosmala.fr">Florent "Bambukah" Kosmala</a>
         </p>
-        <ul>Find the author :
-          <li>
-            <a href="https://peakd.com/@bambukah">HIVE</a>
-          </li>
-          <li>
-            <a href="https://twitter.com/florentkosmala">Twitter</a>
-          </li>
-          <li>
-            <a href="https://discord.gg/u2qfuaFMwt">Discord</a>
-          </li>
-          <li>
-            <a href="https://github.com/fkosmala/">GitHub</a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/kosflorent/">Instagram</a>
-          </li>
-        </ul>
+        <div>
+          Find the author :
+          <ul>
+            <li>
+              <a href="https://peakd.com/@bambukah">HIVE</a>
+            </li>
+            <li>
+              <a href="https://discord.gg/u2qfuaFMwt">Discord</a>
+            </li>
+            <li>
+              <a href="https://github.com/fkosmala/">GitHub</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/kosflorent/">Instagram</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
-    <script src="https://unpkg.com/jquery@3.7.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
     {% block script %}{% endblock %}
 </body>
 </html>
