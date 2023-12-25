@@ -166,7 +166,6 @@ $app->get('/tokens/{name}', function ($request, $response, $args) {
     $heApi = new HeAccount($this->get('apiConfig'));
     $tokens = $heApi->getAccountBalance($account);
     usort ($tokens, 'compareByName');
-    print_r($tokens);
     $payload = json_encode($tokens, JSON_PRETTY_PRINT);
 
     $response->getBody()->write($payload);
