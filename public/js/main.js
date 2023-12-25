@@ -121,7 +121,11 @@ $(function() {
                 account = $(this).parents('tr').find('.accName').text();
                 share = $(this).parents('tr').find('.accShare').text();
                 accValue = (share/100)*valueToken; 
-                finalVal = (Math.floor(accValue*100) / 100);
+                if (accValue < 0.01) {
+                    finalVal = parseFloat((accValue*100) / 100).toFixed(8);
+                } else {
+                    finalVal = (Math.floor(accValue*100) / 100);
+                }
                 sendValue = sendValue + finalVal;
                 sender = $('#sendAccount').val();
                 json_payload.push({
