@@ -122,7 +122,7 @@ $(function() {
                 share = $(this).parents('tr').find('.accShare').text();
                 accValue = (share/100)*valueToken; 
                 if (accValue < 0.01) {
-                    finalVal = parseFloat((accValue*100) / 100).toFixed(8);
+                    finalVal = (accValue*100) / 100;
                 } else {
                     finalVal = (Math.floor(accValue*100) / 100);
                 }
